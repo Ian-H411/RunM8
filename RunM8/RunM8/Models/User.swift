@@ -24,11 +24,20 @@ class User {
         self.userName = name
         self.userID = id
     }
+    init? (user: ImportUser) {
+        self.userName = user.userName
+        self.userID = user.id
+    }
+    
 }
 
-struct importUser {
+struct ImportUser: Codable {
     let userName: String
     
+    let id: String
     
+    let runIDs: [String]
+    
+    let friendIDs: [String]
 }
-    
+
