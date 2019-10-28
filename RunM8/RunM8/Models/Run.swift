@@ -10,4 +10,23 @@ import Foundation
 
 class Run {
     
+    let time: Int
+    
+    let date: Date
+    
+    var name: String
+    
+    //expressed as an array of tuples (lat,long)
+    var route: [(Int,Int)]
+    
+    let elevation: Int
+    
+    init(time: Int, elevation: Int, route: [(Int,Int)], date: Date = Date(), name: String ) {
+        self.time = time
+        self.date = date
+        self.name = name
+        self.elevation = elevation
+        self.route = route
+    }
+    
 }
