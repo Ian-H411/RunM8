@@ -6,5 +6,6 @@ target 'RunM8' do
   use_frameworks!
 
   # Pods for RunM8
-pod 'Firebase/Analytics'
+pod 'Firebase/Core'
+pod 'Firebase/Firestore'
 end
