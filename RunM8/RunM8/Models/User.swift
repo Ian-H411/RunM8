@@ -8,6 +8,13 @@
 
 import Foundation
 
+struct UserConstants {
+    static let userNameKey = "username"
+    static let userIDKey = "userID"
+    static let runIDsKey = "runIDs"
+    static let friendIDsKey = "friendIDs"
+}
+
 class User {
     
     let userName: String
@@ -19,6 +26,10 @@ class User {
     
     var friendIDs: [String] = []
     var friends: [User] = []
+    
+    var jsonDict: [String: Any] {
+        [UserConstants.userNameKey: userName, UserConstants.userIDKey: userID, UserConstants.runIDsKey: runIDs, UserConstants.friendIDsKey: friendIDs]
+    }
     
     init(name: String, id: String = UUID().uuidString) {
         self.userName = name
