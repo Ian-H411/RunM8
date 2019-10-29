@@ -7,14 +7,31 @@
 //
 
 import Foundation
-import Firebase
-import FirebaseFirestore
+
 class RunController {
     
     static let shared = RunController()
-     
+    
+    
     var selectedUser: User?
     
+    func createUser() {
+        
     
+        
+        
+        
+    }
     
+    func retrieveUser() {
+        
+    }
+    
+    func updateUser() {
+        
+    }
+    
+    func deleteUser() {
+        
+    }
 }
