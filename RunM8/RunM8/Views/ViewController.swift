@@ -12,9 +12,13 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        RunController.shared.createUser(name: "success2") { (bool) in
-            if bool{
-                print("success")
+       
+        RunController.shared.retrieveUser(userName: "success") { (success) in
+            if success{
+                guard let user = RunController.shared.selectedUser else {return}
+                print(user.userName)
+            } else {
+                print("error")
             }
         }
     }
