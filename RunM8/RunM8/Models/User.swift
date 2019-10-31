@@ -44,8 +44,14 @@ struct ImportUser: Codable {
     
     let id: String
     
-    let runIDs: [String]
+    let runIDs: [String]?
     
-    let friendIDs: [String]
+    let friendIDs: [String]?
+    private enum CodingKeys: String, CodingKey{
+        case userName = "userName"
+        case id = "id"
+        case runIDs = "runIDs"
+        case friendIDs = "friendIDs"
+    }
 }
 

@@ -12,7 +12,11 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        RunController.shared.createUser(name: "success2") { (bool) in
+            if bool{
+                print("success")
+            }
+        }
     }
     
 

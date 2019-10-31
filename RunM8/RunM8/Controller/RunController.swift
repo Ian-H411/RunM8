@@ -56,23 +56,15 @@ class RunController {
             if let response = response {
                 print(response)
             }
-            guard let data = data else {completion(false);print("data was found nil");return}
-            do {
-                let decoder = JSONDecoder()
-                let person = try decoder.decode(ImportUser.self, from: data)
-                guard let newUser = User(user: person) else {return}
-                self.selectedUser = newUser
-            } catch {
-                print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
-                completion(false)
-                return
+            if let _ = data {
+                completion(true)
             }
-            
         }.resume()
     }
     
     //MARK: - READ
-    func retrieveUser() {
+    func retrieveUser(id: String, completion: @escaping (Bool) -> Void) {
+        
         
     }
     //MARK: - UPDATE
