@@ -13,10 +13,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        RunController.shared.retrieveUser(userName: "success") { (success) in
+        UserController.shared.retrieveUser(userName: "success") { (success) in
             if success{
-                guard let user = RunController.shared.selectedUser else {return}
+                guard let user = UserController.shared.selectedUser else {return}
                 print(user.userName)
+                UserController.shared.deleteUser(user: user) { (success) in
+                    if success {
+                        print("yay")
+                    }
+                }
             } else {
                 print("error")
             }

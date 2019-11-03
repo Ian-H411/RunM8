@@ -8,9 +8,9 @@
 
 import Foundation
 
-class RunController {
+class UserController {
     
-    static let shared = RunController()
+    static let shared = UserController()
     
     
     var selectedUser: User?
@@ -93,6 +93,7 @@ class RunController {
                 print(profileArrays)
                 guard let userImport = profileArrays.first else { completion(false); print("No usernames found");return}
                 let user = User(user: userImport.value)
+                user?.userID = userImport.key
                 self.selectedUser = user
                 completion(true)
             } catch {
@@ -103,11 +104,38 @@ class RunController {
         }.resume()
     }
     //MARK: - UPDATE
-    func updateUser() {
+    func updateUser(user:User, completion: @escaping (Bool) -> Void) {
         
     }
     //MARK: - DELTETE
-    func deleteUser() {
-        
+    func deleteUser(user:User, completion: @escaping (Bool) -> Void) {
+        guard var baseURL = URL(string: "https://runm8-a2d91.firebaseio.com/") else {completion(false);print("could not create url");return}
+               baseURL.appendPathComponent("users")
+            baseURL.appendPathComponent(user.userID)
+               let apikey = retrieveValueFromPlist(key: "RunM8Key", plistName: "APIKeys")
+               let queryApiItem = URLQueryItem(name: "key", value: apikey)
+               var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
+               urlComponents?.queryItems = [queryApiItem]
+               guard let url = urlComponents?.url else {return}
+               var request = URLRequest(url: url.appendingPathExtension("json"))
+               print(request.url!)
+               request.httpBody = nil
+               request.httpMethod = "DELETE"
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            if let response = response {
+                print(response)
+            }
+            if let _ = data {
+                self.selectedUser = nil
+                print("userDeleted")
+                completion(true)
+                return
+            }
+        }.resume()
     }
 }
