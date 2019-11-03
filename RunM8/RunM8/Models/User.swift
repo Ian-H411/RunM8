@@ -19,7 +19,7 @@ class User {
     
     let userName: String
     
-    let userID: String
+    var userID: String
     
     var runIDs: [String] = []
     var runs: [Run] = []

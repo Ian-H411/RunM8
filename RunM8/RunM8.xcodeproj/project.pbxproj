@@ -15,7 +15,7 @@
 		253146412367566200A5A306 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 253146402367566200A5A306 /* GoogleService-Info.plist */; };
 		253146432367582400A5A306 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253146422367582400A5A306 /* User.swift */; };
 		253146452367588D00A5A306 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253146442367588D00A5A306 /* Run.swift */; };
-		253146472368A76E00A5A306 /* RunController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253146462368A76E00A5A306 /* RunController.swift */; };
+		253146472368A76E00A5A306 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253146462368A76E00A5A306 /* UserController.swift */; };
 		25B943182369168D00DF1B62 /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 25B943172369168D00DF1B62 /* APIKeys.plist */; };
 		25B9431A2369B3D400DF1B62 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B943192369B3D400DF1B62 /* ViewController.swift */; };
 /* End PBXBuildFile section */
@@ -31,7 +31,7 @@
 		253146402367566200A5A306 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		253146422367582400A5A306 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		253146442367588D00A5A306 /* Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
-		253146462368A76E00A5A306 /* RunController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunController.swift; sourceTree = "<group>"; };
+		253146462368A76E00A5A306 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		25B943172369168D00DF1B62 /* APIKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
 		25B943192369B3D400DF1B62 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,7 +92,7 @@
 		252D652223625B5C005186E2 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				253146462368A76E00A5A306 /* RunController.swift */,
+				253146462368A76E00A5A306 /* UserController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -204,7 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25B9431A2369B3D400DF1B62 /* ViewController.swift in Sources */,
-				253146472368A76E00A5A306 /* RunController.swift in Sources */,
+				253146472368A76E00A5A306 /* UserController.swift in Sources */,
 				252D650E23625B4A005186E2 /* AppDelegate.swift in Sources */,
 				253146452367588D00A5A306 /* Run.swift in Sources */,
 				252D651023625B4A005186E2 /* SceneDelegate.swift in Sources */,
