@@ -21,7 +21,7 @@ class RunController {
         guard let value = propertyList?.value(forKey: key) as? String else { return "error" }
         return value
     }
-
+    
     //MARK: - CREATE
     func createUser(name:String, completion: @escaping (Bool) -> Void ) {
         let user = User(name: name )
@@ -69,9 +69,12 @@ class RunController {
         let apikey = retrieveValueFromPlist(key: "RunM8Key", plistName: "APIKeys")
         let queryApiItem = URLQueryItem(name: "key", value: apikey)
         var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
-        urlComponents?.queryItems = [queryApiItem]
+        let orderQueryItem = URLQueryItem(name: "orderBy", value: "\"userName\"" )
+        let userNameQuery = URLQueryItem(name: "equalTo", value: "\"\(userName)\"")
+        urlComponents?.queryItems = [queryApiItem,orderQueryItem,userNameQuery]
         guard let url = urlComponents?.url else {return}
-        var request = URLRequest(url: url.appendingPathComponent("json"))
+        var request = URLRequest(url: url.appendingPathExtension("json"))
+        print(request.url!)
         request.httpBody = nil
         request.httpMethod = "GET"
         URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -86,9 +89,10 @@ class RunController {
             guard let data = data else {return}
             do {
                 let decoder = JSONDecoder()
-                let profileArrays = try decoder.decode([ImportUser].self, from: data)
+                let profileArrays = try decoder.decode([String:ImportUser].self, from: data)
+                print(profileArrays)
                 guard let userImport = profileArrays.first else { completion(false); print("No usernames found");return}
-                let user = User(user: userImport)
+                let user = User(user: userImport.value)
                 self.selectedUser = user
                 completion(true)
             } catch {
