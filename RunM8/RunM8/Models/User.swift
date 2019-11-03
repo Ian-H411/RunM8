@@ -17,8 +17,7 @@ struct UserConstants {
 
 class User {
     
-    let userName: String
-    
+    var userName: String
     var userID: String
     
     var runIDs: [String] = []
