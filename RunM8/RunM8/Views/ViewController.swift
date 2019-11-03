@@ -17,9 +17,9 @@ class ViewController: UIViewController {
             if success{
                 guard let user = UserController.shared.selectedUser else {return}
                 print(user.userName)
-                UserController.shared.deleteUser(user: user) { (success) in
+                UserController.shared.updateUser(user: user, newUserName: "dave") { (success) in
                     if success {
-                        print("yay")
+                        print("hoohrah")
                     }
                 }
             } else {

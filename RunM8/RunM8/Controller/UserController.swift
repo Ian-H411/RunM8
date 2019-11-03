@@ -103,9 +103,42 @@ class UserController {
             }
         }.resume()
     }
+    
     //MARK: - UPDATE
-    func updateUser(user:User, completion: @escaping (Bool) -> Void) {
-        
+    func updateUser(user:User, newUserName: String, completion: @escaping (Bool) -> Void) {
+        user.userName = newUserName
+        guard var baseURL = URL(string: "https://runm8-a2d91.firebaseio.com/") else {return}
+        baseURL.appendPathComponent("users")
+        baseURL.appendPathComponent(user.userID)
+        let apiKey = retrieveValueFromPlist(key: "RunM8Key", plistName: "APIKeys")
+        let queryApiItem = URLQueryItem(name: "key", value: apiKey)
+        var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
+        urlComponents?.queryItems = [queryApiItem]
+        guard let url = urlComponents?.url else {return}
+        var request = URLRequest(url: url.appendingPathExtension("json"))
+        print(url)
+        request.httpBody = nil
+        request.httpMethod = "PATCH"
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            if let response = response {
+                print(response)
+            }
+            guard let data = data else {return}
+            do {
+                let decoder = JSONDecoder()
+                let person = try decoder.decode([String: ImportUser].self, from: data)
+                print(person)
+            } catch {
+                print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+        }.resume()
     }
     //MARK: - DELTETE
     func deleteUser(user:User, completion: @escaping (Bool) -> Void) {
