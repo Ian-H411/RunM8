@@ -18,6 +18,7 @@
 		253146472368A76E00A5A306 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253146462368A76E00A5A306 /* UserController.swift */; };
 		25B943182369168D00DF1B62 /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 25B943172369168D00DF1B62 /* APIKeys.plist */; };
 		25B9431A2369B3D400DF1B62 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B943192369B3D400DF1B62 /* ViewController.swift */; };
+		25B9431D236F246B00DF1B62 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B9431C236F246B00DF1B62 /* Reachability.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		253146462368A76E00A5A306 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		25B943172369168D00DF1B62 /* APIKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
 		25B943192369B3D400DF1B62 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		25B9431C236F246B00DF1B62 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 				252D652423625B60005186E2 /* Models */,
 				252D652323625B5E005186E2 /* Views */,
 				252D652223625B5C005186E2 /* Controller */,
+				25B9431B236F243E00DF1B62 /* Helper files */,
 				252D652123625B5A005186E2 /* Resources */,
 				252D651B23625B4D005186E2 /* Info.plist */,
 				253146402367566200A5A306 /* GoogleService-Info.plist */,
@@ -121,6 +124,14 @@
 				252D651323625B4A005186E2 /* Main.storyboard */,
 			);
 			path = StoryBoards;
+			sourceTree = "<group>";
+		};
+		25B9431B236F243E00DF1B62 /* Helper files */ = {
+			isa = PBXGroup;
+			children = (
+				25B9431C236F246B00DF1B62 /* Reachability.swift */,
+			);
+			path = "Helper files";
 			sourceTree = "<group>";
 		};
 		D897B2C8DAD91554E481A5B6 /* Pods */ = {
@@ -203,6 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25B9431D236F246B00DF1B62 /* Reachability.swift in Sources */,
 				25B9431A2369B3D400DF1B62 /* ViewController.swift in Sources */,
 				253146472368A76E00A5A306 /* UserController.swift in Sources */,
 				252D650E23625B4A005186E2 /* AppDelegate.swift in Sources */,

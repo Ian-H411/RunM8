@@ -6,8 +6,8 @@
 //  Copyright © 2019 Ian Hall. All rights reserved.
 //
 
-import Foundation
 
+import UIKit
 class UserController {
     
     static let shared = UserController()
@@ -56,8 +56,15 @@ class UserController {
             if let response = response {
                 print(response)
             }
-            if let _ = data {
-                completion(true)
+            guard let data = data else {return}
+            do{
+                let decoder = JSONDecoder()
+                let locationID = try decoder.decode([String:String].self, from:data)
+                if let id = locationID["name"] {
+                    user.userID = id
+                }
+            } catch {
+                print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
             }
         }.resume()
     }
@@ -103,7 +110,7 @@ class UserController {
             }
         }.resume()
     }
-    
+    //TODO: - STILL NEEDS WORK
     //MARK: - UPDATE
     func updateUser(user:User, newUserName: String, completion: @escaping (Bool) -> Void) {
         user.userName = newUserName
@@ -143,17 +150,17 @@ class UserController {
     //MARK: - DELTETE
     func deleteUser(user:User, completion: @escaping (Bool) -> Void) {
         guard var baseURL = URL(string: "https://runm8-a2d91.firebaseio.com/") else {completion(false);print("could not create url");return}
-               baseURL.appendPathComponent("users")
-            baseURL.appendPathComponent(user.userID)
-               let apikey = retrieveValueFromPlist(key: "RunM8Key", plistName: "APIKeys")
-               let queryApiItem = URLQueryItem(name: "key", value: apikey)
-               var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
-               urlComponents?.queryItems = [queryApiItem]
-               guard let url = urlComponents?.url else {return}
-               var request = URLRequest(url: url.appendingPathExtension("json"))
-               print(request.url!)
-               request.httpBody = nil
-               request.httpMethod = "DELETE"
+        baseURL.appendPathComponent("users")
+        baseURL.appendPathComponent(user.userID)
+        let apikey = retrieveValueFromPlist(key: "RunM8Key", plistName: "APIKeys")
+        let queryApiItem = URLQueryItem(name: "key", value: apikey)
+        var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
+        urlComponents?.queryItems = [queryApiItem]
+        guard let url = urlComponents?.url else {return}
+        var request = URLRequest(url: url.appendingPathExtension("json"))
+        print(request.url!)
+        request.httpBody = nil
+        request.httpMethod = "DELETE"
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
                 print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
@@ -170,5 +177,18 @@ class UserController {
                 return
             }
         }.resume()
+    }
+    //MARK: - NETWORK
+    func checkForInternet(in vc: UIViewController) {
+        if !Reachability.isConnectedToNetwork(){
+            presentNoInternetAlert(vc: vc)
+        }
+    }
+    
+    private func presentNoInternetAlert(vc: UIViewController){
+        let alert = UIAlertController(title: "No Internet", message: "Sorry but this function requires an internet connection.  check your connection and try again", preferredStyle: .alert)
+        let okayButton = UIAlertAction(title: "okay", style: .default, handler: nil)
+        alert.addAction(okayButton)
+        vc.present(alert, animated: true)
     }
 }
