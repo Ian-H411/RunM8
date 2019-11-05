@@ -7,14 +7,17 @@
 //
 
 import Foundation
-
+import CoreLocation
 class RunController {
     
     let shared = RunController()
     
     //MARK: - ADD A RUN
-    func addARun(name: String, completion: @escaping (Bool) -> Void ) {
+    func addARun(name: String, route: [CLLocation], time: Int, completion: @escaping (Bool) -> Void ) {
+        guard let user = UserController.shared.selectedUser else {return}
+        let elevations = route.map({Int($0.altitude)})
         
+        let run = ImportRun(time: time, date: "\(Date())", name: String, elevation: elevations, route: <#T##[[Int]]#>)
     }
     
     
