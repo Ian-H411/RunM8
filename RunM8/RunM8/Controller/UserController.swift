@@ -179,10 +179,11 @@ class UserController {
         }.resume()
     }
     //MARK: - NETWORK
-    func checkForInternet(in vc: UIViewController) {
+    func checkForInternet(in vc: UIViewController) -> Bool {
         if !Reachability.isConnectedToNetwork(){
             presentNoInternetAlert(vc: vc)
         }
+        return Reachability.isConnectedToNetwork()
     }
     
     private func presentNoInternetAlert(vc: UIViewController){
