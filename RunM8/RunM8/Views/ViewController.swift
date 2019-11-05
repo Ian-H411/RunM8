@@ -13,19 +13,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        UserController.shared.retrieveUser(userName: "success") { (success) in
-            if success{
-                guard let user = UserController.shared.selectedUser else {return}
-                print(user.userName)
-                UserController.shared.updateUser(user: user, newUserName: "dave") { (success) in
-                    if success {
-                        print("hoohrah")
-                    }
-                }
-            } else {
-                print("error")
+        UserController.shared.createUser(name: "bob") { (success) in
+            if success {
+                print("made it")
             }
         }
+        
     }
     
 
