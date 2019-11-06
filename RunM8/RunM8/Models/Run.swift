@@ -20,11 +20,11 @@ class Run {
     let userReferenceID: String
     
     ///expressed as an array of arrays [lat,long]
-    var route: [[Int]]
+    var route: [[Double]]
     
     let elevation: Int
     
-    init(time: Int, elevation: Int, route: [[Int]], date: Date = Date(), name: String, user: User ) {
+    init(time: Int, elevation: Int, route: [[Double]], date: Date = Date(), name: String, user: User ) {
         self.time = time
         self.date = date
         self.name = name
@@ -56,6 +56,6 @@ struct ImportRun: Codable {
     
     let elevation: Int
     
-    let route: [[Int]]
+    let route: [[Double]]
 }
 
