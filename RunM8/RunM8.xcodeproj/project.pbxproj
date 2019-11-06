@@ -77,6 +77,7 @@
 				252D652323625B5E005186E2 /* Views */,
 				252D652223625B5C005186E2 /* Controller */,
 				25B9431B236F243E00DF1B62 /* Helper files */,
+				25B94326237364C700DF1B62 /* UI */,
 				252D652123625B5A005186E2 /* Resources */,
 				252D651B23625B4D005186E2 /* Info.plist */,
 			);
@@ -137,6 +138,13 @@
 				25B9432023711F4800DF1B62 /* CoreLocationManager.swift */,
 			);
 			path = "Helper files";
+			sourceTree = "<group>";
+		};
+		25B94326237364C700DF1B62 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
