@@ -14,6 +14,7 @@ class UserController {
     
     
     var selectedUser: User?
+    
     //MARK: - HELPER FUNCTIONS
     func retrieveValueFromPlist(key: String, plistName: String) -> String {
         guard let filepath = Bundle.main.path(forResource: plistName, ofType: "plist") else { return "error" }
