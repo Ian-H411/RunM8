@@ -36,15 +36,15 @@ class RunController {
         let totalElevationGain = startingElevation.distance(to: highestElevation)
         let run = ImportRun(time: time, date: "\(Date())", name: name, elevation: totalElevationGain, route: clPoints)
         //add it locally before the push up
-        let _ = Run(run: run, user: user)
-        pushRunToDataBase(run: run) { (success) in
+        guard let runObj = Run(run: run, user: user) else {completion(false); print("COULD NOT CONVERT A RUN INTO A RUNOBJ");return}
+        pushRunToDataBase(run: run, runObject: runObj) { (success) in
             completion(success)
         }
     }
     
-    fileprivate func pushRunToDataBase(run: ImportRun, completion: @escaping (Bool) -> Void) {
+    fileprivate func pushRunToDataBase(run: ImportRun, runObject: Run, completion: @escaping (Bool) -> Void) {
         guard var baseURL = URL(string: "https://runm8-a2d91.firebaseio.com/") else {completion(false);print("could not create url");return}
-        baseURL.appendPathComponent("users")
+        baseURL.appendPathComponent("runs")
         let apikey = retrieveValueFromPlist(key: "RunM8Key", plistName: "APIKeys")
         let queryItem = URLQueryItem(name: "key", value: apikey)
         var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
@@ -65,6 +65,29 @@ class RunController {
         guard let runDataUnwrapped = runData else {return}
         request.httpBody = runDataUnwrapped
         request.httpMethod = "PUT"
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            if let response = response {
+                print(response)
+            }
+            guard let data = data else {return}
+            
+            do {
+                let decoder = JSONDecoder()
+                let name = try decoder.decode([String:String].self, from: data)
+                runObject.id = name["name"] ?? "NO ID"
+                completion(true)
+                return
+            } catch {
+                print("there was an error in \(#function) :\(error) : \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+        }.resume()
     }
     
     

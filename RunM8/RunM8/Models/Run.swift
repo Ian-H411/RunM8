@@ -24,7 +24,9 @@ class Run {
     
     let elevation: Int
     
-    init(time: Int, elevation: Int, route: [[Double]], date: Date = Date(), name: String, user: User ) {
+    var id: String
+    
+    init(time: Int, elevation: Int, route: [[Double]], date: Date = Date(), name: String, user: User, id: String = UUID().uuidString ) {
         self.time = time
         self.date = date
         self.name = name
@@ -32,9 +34,10 @@ class Run {
         self.route = route
         self.userReferenceID = user.userID
         self.user = user
+        self.id = id
     }
     
-    init?(run: ImportRun, user: User) {
+    init?(run: ImportRun, user: User, id: String = UUID().uuidString) {
         self.time = run.time
         self.date = Date()
         self.name = run.name
@@ -42,6 +45,7 @@ class Run {
         self.route = run.route
         self.userReferenceID = user.userID
         self.user = user
+        self.id = id
     }
     
 }
